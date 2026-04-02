@@ -1,0 +1,164 @@
+diff --git a/index.html b/index.html
+new file mode 100644
+index 0000000..16c5789
+--- /dev/null
++++ b/index.html
+@@ -0,0 +1,157 @@
++<!DOCTYPE html>
++<html lang="zh-CN">
++<head>
++    <meta charset="UTF-8">
++    <meta name="viewport" content="width=device-width, initial-scale=1.0">
++    <title>我的世界 - 用户中心</title>
++    <link rel="stylesheet" href="style.css">
++</head>
++<body>
++    <div class="mc-container">
++        <!-- Title -->
++        <h1 class="mc-title">用户中心</h1>
++
++        <!-- Main Wrapper -->
++        <div class="mc-panel">
++            <!-- Left Sidebar (Navigation & Avatar) -->
++            <aside class="mc-sidebar">
++                <div class="mc-avatar-box">
++                    <img src="https://cravatar.eu/helmavatar/Steve/128.png" alt="User Avatar" class="mc-avatar">
++                    <div class="mc-username">Player_01</div>
++                    <div class="mc-level-badge">LV. 42</div>
++                </div>
++                
++                <nav class="mc-nav">
++                    <button class="mc-btn active" data-tab="profile">个人资料</button>
++                    <button class="mc-btn" data-tab="inventory">物品背包</button>
++                    <button class="mc-btn" data-tab="achievements">游戏成就</button>
++                    <button class="mc-btn" data-tab="settings">系统设置</button>
++                </nav>
++            </aside>
++
++            <!-- Right Content Area -->
++            <main class="mc-content">
++                <!-- Profile Tab -->
++                <section id="profile" class="mc-tab-pane active">
++                    <h2 class="mc-section-title">玩家状态</h2>
++                    <div class="mc-stats">
++                        <div class="mc-stat-item">
++                            <span class="mc-stat-label">生命值</span>
++                            <div class="mc-hearts">
++                                <!-- 10 hearts -->
++                                <span class="mc-heart full"></span><span class="mc-heart full"></span><span class="mc-heart full"></span><span class="mc-heart full"></span><span class="mc-heart full"></span>
++                                <span class="mc-heart full"></span><span class="mc-heart full"></span><span class="mc-heart full"></span><span class="mc-heart half"></span><span class="mc-heart empty"></span>
++                            </div>
++                        </div>
++                        <div class="mc-stat-item">
++                            <span class="mc-stat-label">饥饿度</span>
++                            <div class="mc-food">
++                                <!-- 10 hunger bars -->
++                                <span class="mc-hunger full"></span><span class="mc-hunger full"></span><span class="mc-hunger full"></span><span class="mc-hunger full"></span><span class="mc-hunger full"></span>
++                                <span class="mc-hunger full"></span><span class="mc-hunger full"></span><span class="mc-hunger full"></span><span class="mc-hunger full"></span><span class="mc-hunger full"></span>
++                            </div>
++                        </div>
++                    </div>
++
++                    <h2 class="mc-section-title">经验值</h2>
++                    <div class="mc-exp-bar-container">
++                        <div class="mc-exp-bar">
++                            <div class="mc-exp-fill" style="width: 75%;"></div>
++                        </div>
++                        <div class="mc-exp-text">750 / 1000</div>
++                    </div>
++
++                    <h2 class="mc-section-title">综合数据</h2>
++                    <div class="mc-data-grid">
++                        <div class="mc-data-card">
++                            <div class="mc-data-value">12,304</div>
++                            <div class="mc-data-label">挖掘方块</div>
++                        </div>
++                        <div class="mc-data-card">
++                            <div class="mc-data-value">451</div>
++                            <div class="mc-data-label">击败怪物</div>
++                        </div>
++                        <div class="mc-data-card">
++                            <div class="mc-data-value">89</div>
++                            <div class="mc-data-label">死亡次数</div>
++                        </div>
++                        <div class="mc-data-card">
++                            <div class="mc-data-value">120h</div>
++                            <div class="mc-data-label">游玩时长</div>
++                        </div>
++                    </div>
++                </section>
++
++                <!-- Inventory Tab -->
++                <section id="inventory" class="mc-tab-pane">
++                    <h2 class="mc-section-title">快捷栏</h2>
++                    <div class="mc-inventory-grid">
++                        <!-- 9 slots -->
++                        <div class="mc-slot"><div class="mc-item diamond-sword"></div><span class="mc-item-count">1</span></div>
++                        <div class="mc-slot"><div class="mc-item golden-apple"></div><span class="mc-item-count">64</span></div>
++                        <div class="mc-slot"><div class="mc-item dirt"></div><span class="mc-item-count">64</span></div>
++                        <div class="mc-slot"></div>
++                        <div class="mc-slot"></div>
++                        <div class="mc-slot"></div>
++                        <div class="mc-slot"></div>
++                        <div class="mc-slot"></div>
++                        <div class="mc-slot"></div>
++                    </div>
++                    <div class="mc-slot-desc">选择一个物品查看详情...</div>
++                </section>
++
++                <!-- Achievements Tab -->
++                <section id="achievements" class="mc-tab-pane">
++                    <h2 class="mc-section-title">最新成就</h2>
++                    <ul class="mc-achievement-list">
++                        <li class="mc-achievement-item completed">
++                            <div class="mc-achieve-icon wood"></div>
++                            <div class="mc-achieve-info">
++                                <h3>获得木头</h3>
++                                <p>攻击树木直到方块掉落。</p>
++                            </div>
++                        </li>
++                        <li class="mc-achievement-item completed">
++                            <div class="mc-achieve-icon stone"></div>
++                            <div class="mc-achieve-info">
++                                <h3>石器时代</h3>
++                                <p>用你的新木镐去开采石头。</p>
++                            </div>
++                        </li>
++                        <li class="mc-achievement-item locked">
++                            <div class="mc-achieve-icon diamond"></div>
++                            <div class="mc-achieve-info">
++                                <h3>钻石！</h3>
++                                <p>获取钻石。</p>
++                            </div>
++                        </li>
++                    </ul>
++                </section>
++
++                <!-- Settings Tab -->
++                <section id="settings" class="mc-tab-pane">
++                    <h2 class="mc-section-title">系统设置</h2>
++                    <div class="mc-settings-form">
++                        <div class="mc-setting-row">
++                            <label>游戏难度</label>
++                            <button class="mc-btn small">普通</button>
++                        </div>
++                        <div class="mc-setting-row">
++                            <label>音乐音量</label>
++                            <input type="range" class="mc-slider" value="50">
++                        </div>
++                        <div class="mc-setting-row">
++                            <label>显示披风</label>
++                            <button class="mc-btn small active">开启</button>
++                        </div>
++                        <div class="mc-setting-row">
++                            <button class="mc-btn mc-btn-danger">退出登录</button>
++                        </div>
++                    </div>
++                </section>
++            </main>
++        </div>
++    </div>
++    <script src="script.js"></script>
++</body>
++</html>
+\ No newline at end of file
