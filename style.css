@@ -1,0 +1,488 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+:root {
+    --mc-text-shadow: 2px 2px 0 #3f3f3f;
+    --mc-yellow: #FFFF55;
+    --mc-green: #55FF55;
+    --mc-dark-green: #00AA00;
+    --mc-red: #FF5555;
+    --mc-white: #FFFFFF;
+    --mc-gray: #AAAAAA;
+    --mc-dark-gray: #555555;
+    --mc-bg-color: #c6c6c6;
+    
+    /* Panel border colors */
+    --panel-border-outer: #000000;
+    --panel-border-inner-top-left: #FFFFFF;
+    --panel-border-inner-bottom-right: #555555;
+    
+    /* Button colors */
+    --btn-bg: #c6c6c6;
+    --btn-border-light: #ffffff;
+    --btn-border-dark: #555555;
+    --btn-border-black: #000000;
+    
+    --btn-hover-bg: #8ba2e2;
+    --btn-hover-border-light: #b4c4ff;
+    --btn-hover-border-dark: #4b5d8f;
+    
+    --exp-bg: #000000;
+    --exp-fill-top: #65df35;
+    --exp-fill-bottom: #2b8417;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+}
+
+body {
+    font-family: 'VT323', monospace;
+    background-color: #1d1d1d;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAAaUlEQVR4nI2QMQrAIBBDZ+r9z+P6dxcRk1CQXboE8pA0iIiIsLd291w4s72n5uT0+wZ4n7Xl0B/x1oY+r4A1sC9sS6XlU1iW20N18m+y0pIuNn2K8332k012d2TfG73R5X2d0z/8P5/rAx53I+s/dYpCAAAAAElFTkSuQmCC');
+    background-size: 64px 64px;
+    background-repeat: repeat;
+    background-attachment: fixed;
+    color: var(--mc-white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    image-rendering: pixelated;
+}
+
+/* Base Container */
+.mc-container {
+    width: 90%;
+    max-width: 900px;
+    margin: 2rem auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Title */
+.mc-title {
+    text-align: center;
+    font-size: 3rem;
+    color: var(--mc-white);
+    text-shadow: 4px 4px 0 #3f3f3f;
+    letter-spacing: 2px;
+}
+
+/* Main Panel */
+.mc-panel {
+    display: flex;
+    background-color: var(--mc-bg-color);
+    border: 4px solid var(--panel-border-outer);
+    box-shadow: 
+        inset 4px 4px 0 var(--panel-border-inner-top-left),
+        inset -4px -4px 0 var(--panel-border-inner-bottom-right);
+    padding: 20px;
+    gap: 20px;
+    color: #333;
+}
+
+@media (max-width: 768px) {
+    .mc-panel {
+        flex-direction: column;
+    }
+}
+
+/* Sidebar */
+.mc-sidebar {
+    flex: 0 0 220px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Avatar Box */
+.mc-avatar-box {
+    background-color: #8b8b8b;
+    border: 4px solid var(--panel-border-outer);
+    box-shadow: 
+        inset -4px -4px 0 var(--panel-border-inner-bottom-right),
+        inset 4px 4px 0 var(--panel-border-inner-top-left);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.mc-avatar {
+    width: 80px;
+    height: 80px;
+    image-rendering: pixelated;
+    border: 2px solid #000;
+    box-shadow: 2px 2px 0 rgba(0,0,0,0.5);
+}
+
+.mc-username {
+    font-size: 1.5rem;
+    color: var(--mc-yellow);
+    text-shadow: 2px 2px 0 #3f3f3f;
+    text-align: center;
+}
+
+.mc-level-badge {
+    background-color: var(--mc-dark-green);
+    color: var(--mc-green);
+    padding: 2px 8px;
+    font-size: 1.2rem;
+    border: 2px solid #000;
+    text-shadow: 1px 1px 0 #000;
+}
+
+/* Navigation */
+.mc-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Buttons */
+.mc-btn {
+    font-family: 'VT323', monospace;
+    font-size: 1.5rem;
+    color: var(--mc-white);
+    background-color: var(--btn-bg);
+    border: 2px solid var(--btn-border-black);
+    box-shadow: 
+        inset 3px 3px 0 var(--btn-border-light),
+        inset -3px -3px 0 var(--btn-border-dark);
+    padding: 10px 15px;
+    cursor: pointer;
+    text-shadow: 2px 2px 0 #3f3f3f;
+    transition: all 0.1s;
+    outline: none;
+    text-align: center;
+}
+
+.mc-btn:hover, .mc-btn.active {
+    background-color: var(--btn-hover-bg);
+    box-shadow: 
+        inset 3px 3px 0 var(--btn-hover-border-light),
+        inset -3px -3px 0 var(--btn-hover-border-dark);
+    color: var(--mc-yellow);
+}
+
+.mc-btn:active {
+    box-shadow: 
+        inset 3px 3px 0 var(--btn-border-dark),
+        inset -3px -3px 0 var(--btn-border-light);
+    padding-top: 12px;
+    padding-bottom: 8px;
+}
+
+.mc-btn.small {
+    padding: 5px 10px;
+    font-size: 1.2rem;
+}
+
+.mc-btn-danger {
+    color: var(--mc-red);
+}
+
+/* Content Area */
+.mc-content {
+    flex: 1;
+    background-color: #8b8b8b;
+    border: 4px solid var(--panel-border-outer);
+    box-shadow: 
+        inset -4px -4px 0 var(--panel-border-inner-bottom-right),
+        inset 4px 4px 0 var(--panel-border-inner-top-left);
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.mc-tab-pane {
+    display: none;
+    animation: fadeIn 0.2s;
+}
+
+.mc-tab-pane.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.mc-section-title {
+    font-size: 1.8rem;
+    color: #333;
+    text-shadow: 1px 1px 0 #aaa;
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--mc-dark-gray);
+    padding-bottom: 5px;
+}
+
+/* Stats (Hearts & Hunger) */
+.mc-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    background: #757575;
+    padding: 15px;
+    border: 2px solid #000;
+    box-shadow: inset 2px 2px 0 #555, inset -2px -2px 0 #999;
+}
+
+.mc-stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.mc-stat-label {
+    font-size: 1.2rem;
+    color: #fff;
+    text-shadow: 1px 1px 0 #000;
+}
+
+.mc-hearts, .mc-food {
+    display: flex;
+    gap: 2px;
+}
+
+.mc-heart, .mc-hunger {
+    width: 18px;
+    height: 18px;
+    background-size: cover;
+    image-rendering: pixelated;
+}
+
+/* Placeholder for hearts and hunger icons using base64 or CSS shapes */
+.mc-heart.full {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 9"><path d="M0 2h1v-1h2v-1h3v1h2v1h1v3h-1v1h-1v1h-1v1h-1v1h-1v-1h-1v-1h-1v-1h-1v-1h-1z" fill="%23000"/><path d="M1 2h1v-1h1v-1h1v1h1v1h1v-1h1v-1h1v1h1v2h-1v1h-1v1h-1v1h-1v1h-1v-1h-1v-1h-1v-1h-1v-1h-1z" fill="%23fff"/><path d="M2 2h1v-1h1v1h1v1h1v-1h1v-1h1v1h-1v1h-1v1h-1v1h-1v1h-1v-1h-1v-1h-1v-1h-1v-1z" fill="%23ff0000"/></svg>');
+}
+.mc-heart.half {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 9"><path d="M0 2h1v-1h2v-1h3v1h2v1h1v3h-1v1h-1v1h-1v1h-1v1h-1v-1h-1v-1h-1v-1h-1v-1h-1z" fill="%23000"/><path d="M1 2h1v-1h1v-1h1v1h1v1h1v-1h1v-1h1v1h1v2h-1v1h-1v1h-1v1h-1v1h-1v-1h-1v-1h-1v-1h-1v-1h-1z" fill="%23fff"/><path d="M2 2h1v-1h1v1h1v1h-1v1h-1v1h-1v1h-1v-1h-1v-1h-1v-1h-1v-1z" fill="%23ff0000"/></svg>');
+}
+.mc-heart.empty {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 9"><path d="M0 2h1v-1h2v-1h3v1h2v1h1v3h-1v1h-1v1h-1v1h-1v1h-1v-1h-1v-1h-1v-1h-1v-1h-1z" fill="%23000"/><path d="M1 2h1v-1h1v-1h1v1h1v1h1v-1h1v-1h1v1h1v2h-1v1h-1v1h-1v1h-1v1h-1v-1h-1v-1h-1v-1h-1v-1h-1z" fill="%23fff"/></svg>');
+}
+
+.mc-hunger.full {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 9"><path d="M1 2h7v5h-7z" fill="%23000"/><path d="M2 3h5v3h-5z" fill="%238a4100"/><path d="M2 3h1v1h-1z" fill="%23d67b21"/></svg>');
+}
+
+/* EXP Bar */
+.mc-exp-bar-container {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.mc-exp-bar {
+    height: 14px;
+    background-color: var(--exp-bg);
+    border: 2px solid #000;
+    width: 100%;
+    position: relative;
+    box-shadow: 0 2px 0 rgba(255,255,255,0.3);
+}
+
+.mc-exp-fill {
+    height: 100%;
+    background: linear-gradient(to bottom, var(--exp-fill-top) 0%, var(--exp-fill-top) 50%, var(--exp-fill-bottom) 50%, var(--exp-fill-bottom) 100%);
+    box-shadow: inset 2px 0 0 #fff, inset -2px 0 0 #000;
+}
+
+.mc-exp-text {
+    font-size: 1.5rem;
+    color: var(--mc-green);
+    text-shadow: 2px 2px 0 #000;
+    margin-top: 5px;
+}
+
+/* Data Grid */
+.mc-data-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.mc-data-card {
+    background-color: #757575;
+    border: 2px solid #000;
+    padding: 15px;
+    text-align: center;
+    box-shadow: inset 2px 2px 0 #999, inset -2px -2px 0 #555;
+}
+
+.mc-data-value {
+    font-size: 2rem;
+    color: var(--mc-white);
+    text-shadow: 2px 2px 0 #3f3f3f;
+}
+
+.mc-data-label {
+    font-size: 1.2rem;
+    color: #e0e0e0;
+    margin-top: 5px;
+}
+
+/* Inventory */
+.mc-inventory-grid {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 2px;
+    background-color: #c6c6c6;
+    padding: 4px;
+    border: 2px solid #000;
+    border-radius: 2px;
+    box-shadow: inset -2px -2px 0 #555, inset 2px 2px 0 #fff;
+    margin-bottom: 15px;
+}
+
+.mc-slot {
+    aspect-ratio: 1;
+    background-color: #8b8b8b;
+    border: 2px solid #000;
+    box-shadow: inset 2px 2px 0 #3f3f3f, inset -2px -2px 0 #fff;
+    position: relative;
+    cursor: pointer;
+}
+
+.mc-slot:hover {
+    background-color: #c6c6c6;
+}
+
+.mc-item {
+    width: 100%;
+    height: 100%;
+    background-size: 80%;
+    background-position: center;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+}
+
+.mc-item.diamond-sword {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M11 0l4 4-9 9-2-2 7-11zM1 11l2 2-2 2-2-2 2-2z" fill="%2355FFFF"/><path d="M12 1l2 2-8 8-2-2 8-8z" fill="%2300AAAA"/><path d="M4 10l2 2-2 2-2-2 2-2z" fill="%238B4513"/></svg>');
+}
+
+.mc-item.golden-apple {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><circle cx="8" cy="9" r="6" fill="%23FFFF55"/><path d="M8 3v-2" stroke="%238B4513" stroke-width="2"/></svg>');
+}
+
+.mc-item.dirt {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAAaUlEQVR4nI2QMQrAIBBDZ+r9z+P6dxcRk1CQXboE8pA0iIiIsLd291w4s72n5uT0+wZ4n7Xl0B/x1oY+r4A1sC9sS6XlU1iW20N18m+y0pIuNn2K8332k012d2TfG73R5X2d0z/8P5/rAx53I+s/dYpCAAAAAElFTkSuQmCC');
+}
+
+.mc-item-count {
+    position: absolute;
+    bottom: -2px;
+    right: 2px;
+    font-size: 1.2rem;
+    color: var(--mc-white);
+    text-shadow: 2px 2px 0 #3f3f3f;
+}
+
+.mc-slot-desc {
+    font-size: 1.2rem;
+    color: #333;
+    text-shadow: 1px 1px 0 #aaa;
+    text-align: center;
+    padding: 10px;
+    background: #c6c6c6;
+    border: 2px solid #000;
+}
+
+/* Achievements */
+.mc-achievement-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.mc-achievement-item {
+    display: flex;
+    background-color: #212121;
+    border: 2px solid #555;
+    padding: 10px;
+    gap: 15px;
+    align-items: center;
+}
+
+.mc-achievement-item.completed {
+    border-color: var(--mc-green);
+    background-color: #113311;
+}
+
+.mc-achievement-item.locked {
+    opacity: 0.6;
+}
+
+.mc-achieve-icon {
+    width: 48px;
+    height: 48px;
+    border: 2px solid #000;
+    background-size: cover;
+    image-rendering: pixelated;
+}
+
+.mc-achieve-icon.wood { background-color: #5c4033; }
+.mc-achieve-icon.stone { background-color: #7d7d7d; }
+.mc-achieve-icon.diamond { background-color: #55FFFF; }
+
+.mc-achieve-info h3 {
+    color: var(--mc-yellow);
+    font-size: 1.5rem;
+    text-shadow: 2px 2px 0 #000;
+    margin-bottom: 5px;
+}
+
+.mc-achieve-info p {
+    color: var(--mc-white);
+    font-size: 1.1rem;
+    text-shadow: 1px 1px 0 #000;
+}
+
+/* Settings */
+.mc-settings-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.mc-setting-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #757575;
+    padding: 10px 15px;
+    border: 2px solid #000;
+}
+
+.mc-setting-row label {
+    font-size: 1.4rem;
+    color: #fff;
+    text-shadow: 1px 1px 0 #000;
+}
+
+.mc-slider {
+    -webkit-appearance: none;
+    width: 150px;
+    height: 10px;
+    background: #000;
+    outline: none;
+    border: 2px solid #555;
+}
+
+.mc-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 25px;
+    background: #c6c6c6;
+    border: 2px solid #000;
+    cursor: pointer;
+    box-shadow: inset 2px 2px 0 #fff, inset -2px -2px 0 #555;
+}
