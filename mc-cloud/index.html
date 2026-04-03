@@ -14,27 +14,36 @@
 
     <div class="container">
         <!-- 顶部导航栏 -->
-        <header class="mc-header mc-panel">
+        <header class="mc-header">
+            <!-- 移动端汉堡菜单按钮 -->
+            <button class="mobile-menu-btn" id="mobile-menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <div class="logo">
                 <span class="mc-text-yellow en-font title-shadow">MC CLOUD</span>
                 <span class="zh-font text-white title-shadow">云控制台</span>
             </div>
             <div class="user-info">
-                <div class="status-bars">
+                <div class="status-bars hide-on-mobile">
                     <div class="health-bar" title="账户健康度"></div>
                     <div class="hunger-bar" title="资源使用率"></div>
                 </div>
                 <div class="avatar-container">
                     <!-- 使用 Minotar 获取 Minecraft 头像 -->
                     <img src="https://minotar.net/helm/Steve/64.png" alt="User Avatar" class="avatar">
-                    <span class="zh-font text-white text-shadow">管理员</span>
+                    <span class="zh-font text-white text-shadow hide-on-mobile">管理员</span>
                 </div>
             </div>
         </header>
 
         <div class="main-layout">
+            <!-- 移动端菜单遮罩层 -->
+            <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
             <!-- 左侧导航侧边栏 -->
-            <aside class="mc-sidebar mc-panel">
+            <aside class="mc-sidebar mc-panel" id="mc-sidebar">
                 <nav class="nav-menu">
                     <button class="mc-btn active" data-target="dashboard">
                         <span class="zh-font">控制面板</span>

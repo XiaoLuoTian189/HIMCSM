@@ -1,12 +1,42 @@
 document.addEventListener('DOMContentLoaded', () => {
     // 侧边栏导航点击事件
     const navButtons = document.querySelectorAll('.nav-menu .mc-btn');
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const sidebar = document.getElementById('mc-sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
     
+    // 切换汉堡菜单状态
+    function toggleMobileMenu() {
+        mobileMenuBtn.classList.toggle('open');
+        sidebar.classList.toggle('open');
+        overlay.classList.toggle('active');
+        
+        // 阻止背景滚动
+        if (sidebar.classList.contains('open')) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+    }
+
+    if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+    }
+    
+    if (overlay) {
+        overlay.addEventListener('click', toggleMobileMenu);
+    }
+
     navButtons.forEach(btn => {
         btn.addEventListener('click', (e) => {
             const targetId = e.currentTarget.getAttribute('data-target');
             if (targetId) {
                 switchView(targetId);
+                
+                // 如果在移动端，点击菜单后自动关闭侧边栏
+                if (window.innerWidth <= 800 && sidebar.classList.contains('open')) {
+                    toggleMobileMenu();
+                }
             }
         });
     });
