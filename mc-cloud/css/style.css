@@ -1,0 +1,437 @@
+/* 引入中文字体 Zpix */
+@font-face {
+    font-family: 'Zpix';
+    src: url('https://cdn.jsdelivr.net/gh/SolidZORO/zpix-pixel-font@master/zpix.woff2') format('woff2'),
+         url('https://cdn.jsdelivr.net/npm/zpix-pixel-font@3.1.8/zpix.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    --mc-stone: #c6c6c6;
+    --mc-stone-light: #ffffff;
+    --mc-stone-dark: #555555;
+    --mc-stone-darker: #373737;
+    
+    --mc-bg-dark: #1d1d1d;
+    --mc-black: #000000;
+    
+    --mc-text-normal: #3f3f3f;
+    --mc-text-gray: #4a4a4a;
+    --mc-text-white: #ffffff;
+    
+    --mc-btn-hover: #8fa8cc; /* Minecraft 按钮 hover 时的蓝色遮罩效果 */
+    
+    --mc-green: #55ff55;
+    --mc-green-dark: #153f15;
+    --mc-yellow: #ffff55;
+    --mc-yellow-dark: #3f3f15;
+    --mc-red: #ff5555;
+    --mc-red-dark: #3f1515;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    /* 优先英文像素，然后中文像素 */
+    font-family: 'Press Start 2P', 'Zpix', monospace;
+    background-color: var(--mc-bg-dark);
+    /* 简单的泥土/石头纹理背景 */
+    background-image: 
+        linear-gradient(45deg, #2a2a2a 25%, transparent 25%, transparent 75%, #2a2a2a 75%, #2a2a2a),
+        linear-gradient(45deg, #2a2a2a 25%, transparent 25%, transparent 75%, #2a2a2a 75%, #2a2a2a);
+    background-size: 32px 32px;
+    background-position: 0 0, 16px 16px;
+    color: var(--mc-text-normal);
+    line-height: 1.5;
+    padding: 20px;
+    /* 强制像素画渲染 */
+    image-rendering: pixelated; 
+    /* Webkit 前缀 */
+    -webkit-font-smoothing: none;
+}
+
+/* 字体辅助类 */
+.en-font { font-family: 'Press Start 2P', monospace; }
+.zh-font { font-family: 'Zpix', sans-serif; }
+
+.text-sm { font-size: 12px; }
+.text-xs { font-size: 10px; }
+.text-gray { color: var(--mc-text-gray); }
+.text-white { color: var(--mc-text-white); }
+
+.text-shadow { text-shadow: 2px 2px 0px var(--mc-stone-darker); }
+.title-shadow { text-shadow: 4px 4px 0px var(--mc-black); }
+
+.mc-text-green { color: var(--mc-green); text-shadow: 2px 2px 0px var(--mc-green-dark); }
+.mc-text-yellow { color: var(--mc-yellow); text-shadow: 2px 2px 0px var(--mc-yellow-dark); }
+.mc-text-red { color: var(--mc-red); text-shadow: 2px 2px 0px var(--mc-red-dark); }
+
+.mt-4 { margin-top: 24px; }
+.w-100 { width: 100%; }
+
+/* 主容器 */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Minecraft 3D 面板风格 (凸起) */
+.mc-panel {
+    background-color: var(--mc-stone);
+    border: 4px solid var(--mc-black);
+    box-shadow: 
+        inset 4px 4px 0px var(--mc-stone-light),
+        inset -4px -4px 0px var(--mc-stone-dark);
+    padding: 20px;
+}
+
+/* Minecraft 3D 面板风格 (凹陷) */
+.mc-panel-inset {
+    background-color: #8b8b8b;
+    border: 4px solid var(--mc-black);
+    box-shadow: 
+        inset 4px 4px 0px var(--mc-stone-darker),
+        inset -4px -4px 0px var(--mc-stone-light);
+    padding: 15px;
+}
+
+/* 头部 */
+.mc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #7d7d7d;
+    background-image: url('https://minecraft.wiki/images/Stone_Bricks.png'); /* 石砖背景 */
+    background-size: 64px;
+    box-shadow: 
+        inset 4px 4px 0px rgba(255,255,255,0.3),
+        inset -4px -4px 0px rgba(0,0,0,0.5);
+}
+.mc-header .logo {
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.avatar-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.avatar {
+    width: 48px;
+    height: 48px;
+    border: 2px solid var(--mc-black);
+    box-shadow: 2px 2px 0px rgba(0,0,0,0.5);
+}
+
+/* 状态条 (红心 / 鸡腿) - CSS 模拟 */
+.status-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.health-bar, .hunger-bar {
+    width: 90px;
+    height: 18px;
+    background-size: 18px 18px;
+    background-repeat: repeat-x;
+}
+.health-bar {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 9"><path fill="%23ff1313" d="M1 2h2v1h1v1h1V3h1V2h2v3H7v1H6v1H5v1H4V7H3V6H2V5H1z"/><path fill="%23000" d="M1 1h2v1H1zM6 1h2v1H6zM3 2h1v1H3zM5 2h1v1H5zM0 2h1v3H0zM8 2h1v3H8zM1 5h1v1H1zM7 5h1v1H7zM2 6h1v1H2zM6 6h1v1H6zM3 7h1v1H3zM5 7h1v1H5zM4 8h1v1H4z"/></svg>');
+}
+.hunger-bar {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 9"><path fill="%23b55c27" d="M4 1h3v1H4zM7 2h1v1H7zM3 2h1v2H3zM2 4h1v2H2zM1 6h1v2H1zM2 8h4v1H2zM6 7h1v1H6zM7 6h1v1H7zM8 3h1v3H8z"/></svg>');
+}
+
+/* 布局 */
+.main-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+@media (min-width: 800px) {
+    .main-layout {
+        flex-direction: row;
+    }
+    .mc-sidebar {
+        width: 260px;
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .mc-content {
+        flex-grow: 1;
+    }
+}
+
+/* 侧边栏导航 */
+.nav-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.sidebar-bottom {
+    margin-top: 30px;
+}
+
+/* 按钮样式 */
+.mc-btn {
+    background-color: var(--mc-stone);
+    color: var(--mc-text-normal);
+    font-family: 'Press Start 2P', 'Zpix', monospace;
+    border: 4px solid var(--mc-black);
+    box-shadow: 
+        inset 4px 4px 0px var(--mc-stone-light),
+        inset -4px -4px 0px var(--mc-stone-dark);
+    padding: 12px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.1s;
+    text-decoration: none;
+    user-select: none;
+}
+.mc-btn.sm {
+    padding: 8px 12px;
+    border-width: 2px;
+    box-shadow: 
+        inset 2px 2px 0px var(--mc-stone-light),
+        inset -2px -2px 0px var(--mc-stone-dark);
+    font-size: 14px;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.mc-btn:hover {
+    background-color: var(--mc-btn-hover);
+    color: var(--mc-text-white);
+    text-shadow: 2px 2px 0px var(--mc-stone-darker);
+}
+
+.mc-btn:active, .mc-btn.active {
+    box-shadow: 
+        inset 4px 4px 0px var(--mc-stone-dark),
+        inset -4px -4px 0px var(--mc-stone-light);
+    padding: 16px 16px 8px 24px; /* 点击下陷效果 */
+    background-color: var(--mc-stone);
+    color: var(--mc-text-normal);
+    text-shadow: none;
+}
+.mc-btn.sm:active {
+    box-shadow: 
+        inset 2px 2px 0px var(--mc-stone-dark),
+        inset -2px -2px 0px var(--mc-stone-light);
+    padding: 10px 10px 6px 14px;
+}
+
+/* 危险按钮 */
+.mc-btn.danger:hover {
+    background-color: #d15c5c;
+}
+
+/* 内容区 */
+.section-title {
+    font-size: 20px;
+    border-bottom: 4px solid var(--mc-stone-darker);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* 统计网格 */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+.mc-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+.stat-value {
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.pixel-icon {
+    width: 32px;
+    height: 32px;
+    image-rendering: pixelated;
+}
+
+/* 经验条 (资源使用率) */
+.xp-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+.xp-text {
+    color: var(--mc-green);
+    text-shadow: 2px 2px 0px var(--mc-green-dark);
+    font-size: 16px;
+    display: flex;
+    gap: 10px;
+}
+.xp-bar-bg {
+    width: 100%;
+    max-width: 600px;
+    height: 14px;
+    background-color: #000;
+    border: 2px solid #232323;
+    border-top-color: #000;
+    border-left-color: #000;
+    border-bottom-color: #3b3b3b;
+    border-right-color: #3b3b3b;
+    position: relative;
+}
+.xp-bar-fill {
+    height: 100%;
+    background-color: #27d91e;
+    border-top: 2px solid #57ff4f;
+    border-bottom: 2px solid #148f0d;
+    box-sizing: border-box;
+}
+
+/* 服务器列表 */
+.server-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.server-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    transition: transform 0.2s;
+}
+.server-item:hover {
+    transform: translateX(5px);
+}
+.server-icon img {
+    width: 48px;
+    height: 48px;
+    image-rendering: pixelated;
+    filter: drop-shadow(4px 4px 0px rgba(0,0,0,0.5));
+}
+.server-details {
+    flex-grow: 1;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.server-details h4 {
+    font-size: 16px;
+}
+.status-badge {
+    padding: 8px 12px;
+    border: 2px solid var(--mc-black);
+    background-color: var(--mc-stone);
+    font-size: 14px;
+    box-shadow: inset -2px -2px 0px rgba(0,0,0,0.2);
+}
+.status-badge.online {
+    color: var(--mc-green);
+    text-shadow: 1px 1px 0px var(--mc-green-dark);
+    background-color: #2b452b;
+}
+.status-badge.offline {
+    color: var(--mc-red);
+    text-shadow: 1px 1px 0px var(--mc-red-dark);
+    background-color: #452b2b;
+}
+.server-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* Toast 通知 (类似 MC 成就) */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 9999;
+    pointer-events: none;
+}
+.mc-toast {
+    background-color: #212121;
+    border: 4px solid #000;
+    box-shadow: 
+        inset 4px 4px 0px #373737,
+        inset -4px -4px 0px #111111;
+    padding: 15px 20px;
+    color: #fff;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    animation: slideIn 0.3s ease-out, slideOut 0.3s ease-in 2.7s forwards;
+    pointer-events: auto;
+}
+.mc-toast.success { color: var(--mc-green); }
+.mc-toast.warn { color: var(--mc-yellow); }
+.mc-toast.error { color: var(--mc-red); }
+
+@keyframes slideIn {
+    from { transform: translateX(120%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+@keyframes slideOut {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(120%); opacity: 0; }
+}
+
+/* 响应式调整 */
+@media (max-width: 600px) {
+    .mc-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    .user-info {
+        flex-direction: column-reverse;
+    }
+    .server-item {
+        flex-direction: column;
+        text-align: center;
+    }
+    .server-actions {
+        width: 100%;
+        justify-content: center;
+    }
+}

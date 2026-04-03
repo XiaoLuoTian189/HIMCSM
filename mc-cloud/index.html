@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MC Cloud - 云服务器平台</title>
+    <!-- 引入英文像素字体 (Press Start 2P) -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <!-- 引入自定义样式 -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="toast-container" id="toast-container"></div>
+
+    <div class="container">
+        <!-- 顶部导航栏 -->
+        <header class="mc-header mc-panel">
+            <div class="logo">
+                <span class="mc-text-yellow en-font title-shadow">MC CLOUD</span>
+                <span class="zh-font text-white title-shadow">云控制台</span>
+            </div>
+            <div class="user-info">
+                <div class="status-bars">
+                    <div class="health-bar" title="账户健康度"></div>
+                    <div class="hunger-bar" title="资源使用率"></div>
+                </div>
+                <div class="avatar-container">
+                    <!-- 使用 Minotar 获取 Minecraft 头像 -->
+                    <img src="https://minotar.net/helm/Steve/64.png" alt="User Avatar" class="avatar">
+                    <span class="zh-font text-white text-shadow">管理员</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="main-layout">
+            <!-- 左侧导航侧边栏 -->
+            <aside class="mc-sidebar mc-panel">
+                <nav class="nav-menu">
+                    <button class="mc-btn active" data-target="dashboard">
+                        <span class="zh-font">控制面板</span>
+                        <span class="en-font text-xs">DASHBOARD</span>
+                    </button>
+                    <button class="mc-btn" data-target="instances">
+                        <span class="zh-font">我的实例</span>
+                        <span class="en-font text-xs">SERVERS</span>
+                    </button>
+                    <button class="mc-btn" data-target="billing">
+                        <span class="zh-font">财务中心</span>
+                        <span class="en-font text-xs">BILLING</span>
+                    </button>
+                    <button class="mc-btn" data-target="support">
+                        <span class="zh-font">工单支持</span>
+                        <span class="en-font text-xs">TICKETS</span>
+                    </button>
+                </nav>
+                <div class="sidebar-bottom">
+                    <button class="mc-btn danger w-100" onclick="showToast('正在登出...', 'warn')">
+                        <span class="zh-font">退出登录</span>
+                        <span class="en-font text-xs">LOGOUT</span>
+                    </button>
+                </div>
+            </aside>
+
+            <!-- 右侧主要内容区 -->
+            <main class="mc-content mc-panel">
+                <!-- 概览标题 -->
+                <h2 class="section-title">
+                    <span class="zh-font text-white text-shadow">概览</span> 
+                    <span class="en-font text-gray">/ OVERVIEW</span>
+                </h2>
+
+                <!-- 数据统计卡片 -->
+                <div class="stats-grid">
+                    <div class="mc-card mc-panel-inset">
+                        <h3 class="zh-font text-gray">账户余额</h3>
+                        <div class="stat-value">
+                            <img src="https://minecraft.wiki/images/Emerald_JE3_BE3.png" alt="Emerald" class="pixel-icon">
+                            <span class="en-font mc-text-green">64.00</span>
+                        </div>
+                        <button class="mc-btn sm w-100" onclick="showToast('充值页面开发中...', 'warn')"><span class="zh-font">充值</span></button>
+                    </div>
+                    <div class="mc-card mc-panel-inset">
+                        <h3 class="zh-font text-gray">运行中实例</h3>
+                        <div class="stat-value">
+                            <img src="https://minecraft.wiki/images/Grass_Block.png" alt="Block" class="pixel-icon">
+                            <span class="en-font text-white text-shadow">3</span>
+                            <span class="zh-font text-sm text-white text-shadow"> 台</span>
+                        </div>
+                        <button class="mc-btn sm w-100" onclick="showToast('已刷新实例状态', 'success')"><span class="zh-font">刷新</span></button>
+                    </div>
+                    <div class="mc-card mc-panel-inset">
+                        <h3 class="zh-font text-gray">未读工单</h3>
+                        <div class="stat-value">
+                            <img src="https://minecraft.wiki/images/Book_and_Quill_JE2_BE2.png" alt="Book" class="pixel-icon">
+                            <span class="en-font mc-text-yellow">1</span>
+                        </div>
+                        <button class="mc-btn sm w-100" onclick="showToast('没有新消息')"><span class="zh-font">查看</span></button>
+                    </div>
+                </div>
+
+                <!-- 资源配额经验条 -->
+                <div class="xp-container mt-4">
+                    <div class="xp-text">
+                        <span class="zh-font">资源使用率</span>
+                        <span class="en-font">LEVEL 45</span>
+                    </div>
+                    <div class="xp-bar-bg">
+                        <div class="xp-bar-fill" style="width: 45%;"></div>
+                    </div>
+                </div>
+
+                <!-- 服务器列表标题 -->
+                <h3 class="section-title mt-4">
+                    <span class="zh-font text-white text-shadow">我的服务器</span> 
+                    <span class="en-font text-gray">/ MY SERVERS</span>
+                </h3>
+                
+                <div class="server-list">
+                    <!-- 服务器项 1 -->
+                    <div class="server-item mc-panel-inset">
+                        <div class="server-icon">
+                            <img src="https://minecraft.wiki/images/Command_Block_JE4.png" alt="Server">
+                        </div>
+                        <div class="server-details">
+                            <h4 class="en-font text-white text-shadow">SV-SURVIVAL-01</h4>
+                            <p class="zh-font text-gray text-sm">核心: 4 vCPU | 内存: 8 GB | 存储: 100G NVMe</p>
+                            <p class="en-font text-gray text-xs">IP: 192.168.1.100</p>
+                        </div>
+                        <div class="server-status">
+                            <div class="status-badge online zh-font">运行中</div>
+                        </div>
+                        <div class="server-actions">
+                            <button class="mc-btn sm action-btn" onclick="showToast('服务器重启中...', 'warn')"><span class="zh-font">重启</span></button>
+                            <button class="mc-btn sm action-btn danger" onclick="showToast('服务器已停止', 'error')"><span class="zh-font">停止</span></button>
+                        </div>
+                    </div>
+
+                    <!-- 服务器项 2 -->
+                    <div class="server-item mc-panel-inset">
+                        <div class="server-icon">
+                            <img src="https://minecraft.wiki/images/Redstone_Block_JE2_BE2.png" alt="Server">
+                        </div>
+                        <div class="server-details">
+                            <h4 class="en-font text-white text-shadow">SV-REDSTONE-DB</h4>
+                            <p class="zh-font text-gray text-sm">核心: 2 vCPU | 内存: 4 GB | 存储: 50G SSD</p>
+                            <p class="en-font text-gray text-xs">IP: 192.168.1.101</p>
+                        </div>
+                        <div class="server-status">
+                            <div class="status-badge offline zh-font">已停止</div>
+                        </div>
+                        <div class="server-actions">
+                            <button class="mc-btn sm action-btn" onclick="showToast('服务器启动中...', 'success')"><span class="zh-font">启动</span></button>
+                            <button class="mc-btn sm action-btn" onclick="showToast('正在打开配置面板')"><span class="zh-font">配置</span></button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
