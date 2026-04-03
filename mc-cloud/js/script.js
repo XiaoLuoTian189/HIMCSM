@@ -4,14 +4,10 @@ document.addEventListener('DOMContentLoaded', () => {
     
     navButtons.forEach(btn => {
         btn.addEventListener('click', (e) => {
-            // 移除所有激活状态
-            navButtons.forEach(b => b.classList.remove('active'));
-            // 添加当前激活状态
-            const target = e.currentTarget;
-            target.classList.add('active');
-            
-            const targetName = target.querySelector('.zh-font').innerText;
-            showToast(`导航切换至: ${targetName}`, 'success');
+            const targetId = e.currentTarget.getAttribute('data-target');
+            if (targetId) {
+                switchView(targetId);
+            }
         });
     });
 
@@ -20,6 +16,39 @@ document.addEventListener('DOMContentLoaded', () => {
         showToast('欢迎回到 MC Cloud 云控制台!', 'success');
     }, 500);
 });
+
+// 视图切换功能
+function switchView(viewId) {
+    // 1. 更新导航按钮激活状态
+    const navButtons = document.querySelectorAll('.nav-menu .mc-btn');
+    navButtons.forEach(btn => {
+        if (btn.getAttribute('data-target') === viewId) {
+            btn.classList.add('active');
+            // 获取名称并提示
+            const targetName = btn.querySelector('.zh-font').innerText;
+            // 只有当不是初始化加载时才提示
+            if (document.querySelector('.view-section.active').id !== `view-${viewId}`) {
+                 showToast(`导航切换至: ${targetName}`, 'success');
+            }
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+
+    // 2. 隐藏所有视图
+    const views = document.querySelectorAll('.view-section');
+    views.forEach(view => {
+        view.classList.remove('active');
+    });
+
+    // 3. 显示目标视图
+    const targetView = document.getElementById(`view-${viewId}`);
+    if (targetView) {
+        targetView.classList.add('active');
+        // 平滑滚动回顶部
+        document.getElementById('main-content').scrollTop = 0;
+    }
+}
 
 // 提示框功能 (模仿 Minecraft 成就提示/系统消息)
 function showToast(message, type = 'normal') {

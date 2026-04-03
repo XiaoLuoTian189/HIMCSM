@@ -44,6 +44,10 @@
                         <span class="zh-font">我的实例</span>
                         <span class="en-font text-xs">SERVERS</span>
                     </button>
+                    <button class="mc-btn mc-btn-gold" data-target="market">
+                        <span class="zh-font">购买服务器</span>
+                        <span class="en-font text-xs">MARKET</span>
+                    </button>
                     <button class="mc-btn" data-target="billing">
                         <span class="zh-font">财务中心</span>
                         <span class="en-font text-xs">BILLING</span>
@@ -62,98 +66,218 @@
             </aside>
 
             <!-- 右侧主要内容区 -->
-            <main class="mc-content mc-panel">
-                <!-- 概览标题 -->
-                <h2 class="section-title">
-                    <span class="zh-font text-white text-shadow">概览</span> 
-                    <span class="en-font text-gray">/ OVERVIEW</span>
-                </h2>
+            <main class="mc-content mc-panel" id="main-content">
+                <!-- ================= 视图：控制面板 ================= -->
+                <div class="view-section active" id="view-dashboard">
+                    <!-- 概览标题 -->
+                    <h2 class="section-title">
+                        <span class="zh-font text-white text-shadow">概览</span> 
+                        <span class="en-font text-gray">/ OVERVIEW</span>
+                    </h2>
 
-                <!-- 数据统计卡片 -->
-                <div class="stats-grid">
-                    <div class="mc-card mc-panel-inset">
-                        <h3 class="zh-font text-gray">账户余额</h3>
-                        <div class="stat-value">
-                            <img src="https://minecraft.wiki/images/Emerald_JE3_BE3.png" alt="Emerald" class="pixel-icon">
-                            <span class="en-font mc-text-green">64.00</span>
+                    <!-- 数据统计卡片 -->
+                    <div class="stats-grid">
+                        <div class="mc-card mc-panel-inset">
+                            <h3 class="zh-font text-gray">账户余额</h3>
+                            <div class="stat-value">
+                                <img src="https://minecraft.wiki/images/Emerald_JE3_BE3.png" alt="Emerald" class="pixel-icon">
+                                <span class="en-font mc-text-green">64.00</span>
+                            </div>
+                            <button class="mc-btn sm w-100" onclick="switchView('billing')"><span class="zh-font">充值</span></button>
                         </div>
-                        <button class="mc-btn sm w-100" onclick="showToast('充值页面开发中...', 'warn')"><span class="zh-font">充值</span></button>
+                        <div class="mc-card mc-panel-inset">
+                            <h3 class="zh-font text-gray">运行中实例</h3>
+                            <div class="stat-value">
+                                <img src="https://minecraft.wiki/images/Grass_Block.png" alt="Block" class="pixel-icon">
+                                <span class="en-font text-white text-shadow">3</span>
+                                <span class="zh-font text-sm text-white text-shadow"> 台</span>
+                            </div>
+                            <button class="mc-btn sm w-100" onclick="switchView('instances')"><span class="zh-font">管理</span></button>
+                        </div>
+                        <div class="mc-card mc-panel-inset">
+                            <h3 class="zh-font text-gray">未读工单</h3>
+                            <div class="stat-value">
+                                <img src="https://minecraft.wiki/images/Book_and_Quill_JE2_BE2.png" alt="Book" class="pixel-icon">
+                                <span class="en-font mc-text-yellow">1</span>
+                            </div>
+                            <button class="mc-btn sm w-100" onclick="switchView('support')"><span class="zh-font">查看</span></button>
+                        </div>
                     </div>
-                    <div class="mc-card mc-panel-inset">
-                        <h3 class="zh-font text-gray">运行中实例</h3>
-                        <div class="stat-value">
-                            <img src="https://minecraft.wiki/images/Grass_Block.png" alt="Block" class="pixel-icon">
-                            <span class="en-font text-white text-shadow">3</span>
-                            <span class="zh-font text-sm text-white text-shadow"> 台</span>
+
+                    <!-- 资源配额经验条 -->
+                    <div class="xp-container mt-4">
+                        <div class="xp-text">
+                            <span class="zh-font">资源使用率</span>
+                            <span class="en-font">LEVEL 45</span>
                         </div>
-                        <button class="mc-btn sm w-100" onclick="showToast('已刷新实例状态', 'success')"><span class="zh-font">刷新</span></button>
-                    </div>
-                    <div class="mc-card mc-panel-inset">
-                        <h3 class="zh-font text-gray">未读工单</h3>
-                        <div class="stat-value">
-                            <img src="https://minecraft.wiki/images/Book_and_Quill_JE2_BE2.png" alt="Book" class="pixel-icon">
-                            <span class="en-font mc-text-yellow">1</span>
+                        <div class="xp-bar-bg">
+                            <div class="xp-bar-fill" style="width: 45%;"></div>
                         </div>
-                        <button class="mc-btn sm w-100" onclick="showToast('没有新消息')"><span class="zh-font">查看</span></button>
                     </div>
                 </div>
 
-                <!-- 资源配额经验条 -->
-                <div class="xp-container mt-4">
-                    <div class="xp-text">
-                        <span class="zh-font">资源使用率</span>
-                        <span class="en-font">LEVEL 45</span>
+                <!-- ================= 视图：我的实例 ================= -->
+                <div class="view-section" id="view-instances">
+                    <h2 class="section-title">
+                        <span class="zh-font text-white text-shadow">我的服务器</span> 
+                        <span class="en-font text-gray">/ MY SERVERS</span>
+                    </h2>
+                    
+                    <div class="action-bar mb-3">
+                        <button class="mc-btn sm" onclick="showToast('已刷新列表', 'success')"><span class="zh-font">刷新列表</span></button>
+                        <button class="mc-btn sm mc-btn-gold" onclick="switchView('market')"><span class="zh-font">+ 新建实例</span></button>
                     </div>
-                    <div class="xp-bar-bg">
-                        <div class="xp-bar-fill" style="width: 45%;"></div>
+
+                    <div class="server-list">
+                        <!-- 服务器项 1 -->
+                        <div class="server-item mc-panel-inset">
+                            <div class="server-icon">
+                                <img src="https://minecraft.wiki/images/Command_Block_JE4.png" alt="Server">
+                            </div>
+                            <div class="server-details">
+                                <h4 class="en-font text-white text-shadow">SV-SURVIVAL-01</h4>
+                                <p class="zh-font text-gray text-sm">核心: 4 vCPU | 内存: 8 GB | 存储: 100G NVMe</p>
+                                <p class="en-font text-gray text-xs">IP: 192.168.1.100</p>
+                            </div>
+                            <div class="server-status">
+                                <div class="status-badge online zh-font">运行中</div>
+                            </div>
+                            <div class="server-actions">
+                                <button class="mc-btn sm action-btn" onclick="showToast('服务器重启中...', 'warn')"><span class="zh-font">重启</span></button>
+                                <button class="mc-btn sm action-btn danger" onclick="showToast('服务器已停止', 'error')"><span class="zh-font">停止</span></button>
+                            </div>
+                        </div>
+
+                        <!-- 服务器项 2 -->
+                        <div class="server-item mc-panel-inset">
+                            <div class="server-icon">
+                                <img src="https://minecraft.wiki/images/Redstone_Block_JE2_BE2.png" alt="Server">
+                            </div>
+                            <div class="server-details">
+                                <h4 class="en-font text-white text-shadow">SV-REDSTONE-DB</h4>
+                                <p class="zh-font text-gray text-sm">核心: 2 vCPU | 内存: 4 GB | 存储: 50G SSD</p>
+                                <p class="en-font text-gray text-xs">IP: 192.168.1.101</p>
+                            </div>
+                            <div class="server-status">
+                                <div class="status-badge offline zh-font">已停止</div>
+                            </div>
+                            <div class="server-actions">
+                                <button class="mc-btn sm action-btn" onclick="showToast('服务器启动中...', 'success')"><span class="zh-font">启动</span></button>
+                                <button class="mc-btn sm action-btn" onclick="showToast('正在打开配置面板')"><span class="zh-font">配置</span></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- 服务器列表标题 -->
-                <h3 class="section-title mt-4">
-                    <span class="zh-font text-white text-shadow">我的服务器</span> 
-                    <span class="en-font text-gray">/ MY SERVERS</span>
-                </h3>
-                
-                <div class="server-list">
-                    <!-- 服务器项 1 -->
-                    <div class="server-item mc-panel-inset">
-                        <div class="server-icon">
-                            <img src="https://minecraft.wiki/images/Command_Block_JE4.png" alt="Server">
-                        </div>
-                        <div class="server-details">
-                            <h4 class="en-font text-white text-shadow">SV-SURVIVAL-01</h4>
-                            <p class="zh-font text-gray text-sm">核心: 4 vCPU | 内存: 8 GB | 存储: 100G NVMe</p>
-                            <p class="en-font text-gray text-xs">IP: 192.168.1.100</p>
-                        </div>
-                        <div class="server-status">
-                            <div class="status-badge online zh-font">运行中</div>
-                        </div>
-                        <div class="server-actions">
-                            <button class="mc-btn sm action-btn" onclick="showToast('服务器重启中...', 'warn')"><span class="zh-font">重启</span></button>
-                            <button class="mc-btn sm action-btn danger" onclick="showToast('服务器已停止', 'error')"><span class="zh-font">停止</span></button>
-                        </div>
-                    </div>
+                <!-- ================= 视图：购买服务器 (Market) ================= -->
+                <div class="view-section" id="view-market">
+                    <h2 class="section-title">
+                        <span class="zh-font text-white text-shadow">购买服务器</span> 
+                        <span class="en-font text-gray">/ MARKET</span>
+                    </h2>
+                    
+                    <p class="zh-font text-gray mb-3">选择适合您的云端方块，立即开始构建！</p>
 
-                    <!-- 服务器项 2 -->
-                    <div class="server-item mc-panel-inset">
-                        <div class="server-icon">
-                            <img src="https://minecraft.wiki/images/Redstone_Block_JE2_BE2.png" alt="Server">
+                    <div class="market-grid">
+                        <!-- 套餐 1 -->
+                        <div class="mc-card mc-panel-inset plan-card">
+                            <div class="plan-header">
+                                <img src="https://minecraft.wiki/images/Coal_Block_JE3_BE2.png" alt="Coal" class="pixel-icon">
+                                <h3 class="zh-font">煤炭版 (基础)</h3>
+                            </div>
+                            <div class="plan-price en-font mc-text-yellow">
+                                <img src="https://minecraft.wiki/images/Emerald_JE3_BE3.png" alt="Emerald" class="pixel-icon-sm">
+                                9.9/mo
+                            </div>
+                            <ul class="plan-specs zh-font text-sm">
+                                <li>- 1 vCPU 核心</li>
+                                <li>- 2 GB 内存</li>
+                                <li>- 30 GB SSD 存储</li>
+                                <li>- 适合个人博客/小游戏服</li>
+                            </ul>
+                            <button class="mc-btn w-100 mt-auto" onclick="showToast('正在创建订单...', 'success')"><span class="zh-font">立即购买</span></button>
                         </div>
-                        <div class="server-details">
-                            <h4 class="en-font text-white text-shadow">SV-REDSTONE-DB</h4>
-                            <p class="zh-font text-gray text-sm">核心: 2 vCPU | 内存: 4 GB | 存储: 50G SSD</p>
-                            <p class="en-font text-gray text-xs">IP: 192.168.1.101</p>
+
+                        <!-- 套餐 2 -->
+                        <div class="mc-card mc-panel-inset plan-card featured">
+                            <div class="plan-header">
+                                <img src="https://minecraft.wiki/images/Iron_Block_JE5_BE6.png" alt="Iron" class="pixel-icon">
+                                <h3 class="zh-font">铁锭版 (进阶)</h3>
+                            </div>
+                            <div class="plan-price en-font mc-text-yellow">
+                                <img src="https://minecraft.wiki/images/Emerald_JE3_BE3.png" alt="Emerald" class="pixel-icon-sm">
+                                19.9/mo
+                            </div>
+                            <ul class="plan-specs zh-font text-sm">
+                                <li>- 2 vCPU 核心</li>
+                                <li>- 4 GB 内存</li>
+                                <li>- 60 GB SSD 存储</li>
+                                <li>- 适合中小型联机服</li>
+                            </ul>
+                            <button class="mc-btn mc-btn-gold w-100 mt-auto" onclick="showToast('正在创建订单...', 'success')"><span class="zh-font">立即购买</span></button>
                         </div>
-                        <div class="server-status">
-                            <div class="status-badge offline zh-font">已停止</div>
-                        </div>
-                        <div class="server-actions">
-                            <button class="mc-btn sm action-btn" onclick="showToast('服务器启动中...', 'success')"><span class="zh-font">启动</span></button>
-                            <button class="mc-btn sm action-btn" onclick="showToast('正在打开配置面板')"><span class="zh-font">配置</span></button>
+
+                        <!-- 套餐 3 -->
+                        <div class="mc-card mc-panel-inset plan-card">
+                            <div class="plan-header">
+                                <img src="https://minecraft.wiki/images/Diamond_Block_JE5_BE5.png" alt="Diamond" class="pixel-icon">
+                                <h3 class="zh-font text-white text-shadow">钻石版 (尊享)</h3>
+                            </div>
+                            <div class="plan-price en-font mc-text-yellow">
+                                <img src="https://minecraft.wiki/images/Emerald_JE3_BE3.png" alt="Emerald" class="pixel-icon-sm">
+                                49.9/mo
+                            </div>
+                            <ul class="plan-specs zh-font text-sm">
+                                <li>- 4 vCPU 核心</li>
+                                <li>- 8 GB 内存</li>
+                                <li>- 120 GB NVMe 存储</li>
+                                <li>- 适合大型社区服/高并发</li>
+                            </ul>
+                            <button class="mc-btn w-100 mt-auto" onclick="showToast('正在创建订单...', 'success')"><span class="zh-font">立即购买</span></button>
                         </div>
                     </div>
                 </div>
+
+                <!-- ================= 视图：财务中心 ================= -->
+                <div class="view-section" id="view-billing">
+                    <h2 class="section-title">
+                        <span class="zh-font text-white text-shadow">财务中心</span> 
+                        <span class="en-font text-gray">/ BILLING</span>
+                    </h2>
+                    <div class="mc-panel-inset text-center" style="padding: 40px 20px;">
+                        <img src="https://minecraft.wiki/images/Chest_JE2_BE2.png" alt="Chest" class="pixel-icon" style="width: 64px; height: 64px; margin-bottom: 20px;">
+                        <h3 class="zh-font mb-3">您的金库</h3>
+                        <p class="zh-font text-gray mb-3">当前余额充足。暂无未支付账单。</p>
+                        <button class="mc-btn mc-btn-gold mx-auto" onclick="showToast('充值网关加载中...', 'warn')"><span class="zh-font">充值绿宝石</span></button>
+                    </div>
+                </div>
+
+                <!-- ================= 视图：工单支持 ================= -->
+                <div class="view-section" id="view-support">
+                    <h2 class="section-title">
+                        <span class="zh-font text-white text-shadow">工单支持</span> 
+                        <span class="en-font text-gray">/ TICKETS</span>
+                    </h2>
+                    <div class="action-bar mb-3">
+                        <button class="mc-btn sm mc-btn-gold" onclick="showToast('正在打开新工单表单...')"><span class="zh-font">+ 提交新工单</span></button>
+                    </div>
+                    <div class="server-list">
+                        <div class="server-item mc-panel-inset">
+                            <div class="server-icon">
+                                <img src="https://minecraft.wiki/images/Paper_JE2_BE2.png" alt="Ticket">
+                            </div>
+                            <div class="server-details">
+                                <h4 class="zh-font text-white text-shadow">如何配置伪静态？</h4>
+                                <p class="en-font text-gray text-xs">ID: TKT-1024 | DATE: 2023-10-24</p>
+                            </div>
+                            <div class="server-status">
+                                <div class="status-badge online zh-font" style="background-color: #5555ff; color: #fff; text-shadow: none;">已回复</div>
+                            </div>
+                            <button class="mc-btn sm" onclick="showToast('正在读取工单内容...')"><span class="zh-font">查看</span></button>
+                        </div>
+                    </div>
+                </div>
+
             </main>
         </div>
     </div>
