@@ -68,10 +68,10 @@ function showToast(message, type = 'normal') {
     
     // 设置 Toast 内部 HTML
     toast.innerHTML = `
-        <img src="${randomIcon}" style="width: 32px; height: 32px; image-rendering: pixelated;" alt="Icon">
+        <img src="${randomIcon}" style="width: 32px; height: 32px; image-rendering: pixelated; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));" alt="Icon">
         <div>
-            <div class="en-font" style="font-size: 10px; color: #ffff55; margin-bottom: 5px; text-shadow: 2px 2px 0px #3f3f15;">SYSTEM MESSAGE</div>
-            <div class="zh-font text-shadow">${message}</div>
+            <div class="en-font" style="font-size: 10px; color: var(--mc-yellow); margin-bottom: 4px; letter-spacing: 0.5px;">SYSTEM MESSAGE</div>
+            <div class="zh-font" style="font-weight: 500;">${message}</div>
         </div>
     `;
     
